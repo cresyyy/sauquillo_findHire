@@ -2,13 +2,13 @@
 include 'core/dbConfig.php';
 session_start();
 
-// Ensure only HR users can access this page
+
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'hr') {
     header("Location: login.php");
     exit();
 }
 
-// Fetch the username of the logged-in HR user
+
 $hr_id = $_SESSION['user_id'];
 $username = '';
 $job_posts = null;
@@ -38,7 +38,6 @@ if (isset($_POST['create_post'])) {
     }
 }
 
-// Fetch job posts
 if ($stmt = $conn->prepare("
     SELECT jp.post_id, jp.title, jp.description, jp.location,
            u.username AS posted_by_username,
@@ -145,7 +144,6 @@ if ($stmt = $conn->prepare("
             text-decoration: underline;
         }
 
-        /* Footer Styling */
         footer {
             background-color: #0097b2;
             color: #000000;

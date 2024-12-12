@@ -9,7 +9,6 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'applicant') {
 
 $applicant_id = $_SESSION['user_id'];
 
-// Fetch all job applications of the applicant
 $applications = $conn->prepare("SELECT ja.application_id, ja.status, jp.title, jp.post_id 
                                 FROM job_applications ja
                                 JOIN job_posts jp ON ja.post_id = jp.post_id

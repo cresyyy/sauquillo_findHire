@@ -2,13 +2,13 @@
 include 'core/dbConfig.php';
 session_start();
 
-// Ensure only HR users can access this page
+
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'hr') {
     header("Location: login.php");
     exit();
 }
 
-// Fetch the job post ID from the URL
+
 if (isset($_GET['post_id'])) {
     $post_id = $_GET['post_id'];
 
@@ -20,7 +20,7 @@ if (isset($_GET['post_id'])) {
     $stmt->bind_result($title, $description, $location);
     $stmt->fetch();
 
-    // If no job post is found, redirect to the HR home page
+
     if ($stmt->num_rows == 0) {
         header("Location: hr_home.php");
         exit();

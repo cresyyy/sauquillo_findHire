@@ -2,7 +2,6 @@
 include 'core/dbConfig.php';
 session_start();
 
-// Ensure only HR can access this page
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'hr') {
     header("Location: login.php");
     exit();
@@ -24,7 +23,6 @@ $update = $conn->prepare("UPDATE job_applications SET status = ? WHERE applicati
 $update->bind_param("si", $status, $application_id);
 
 if ($update->execute()) {
-    // Redirect back to the HR's view of applications with a success message
     header("Location: view_applications.php?status=success");
 } else {
     echo "Error updating application status: " . $update->error;

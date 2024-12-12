@@ -3,7 +3,6 @@
 <html>
 <head>
     <title>Login</title>
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .gradient-custom-2 {
@@ -61,7 +60,6 @@
 
                 <form action="" method="POST">
                   <?php
-                  // Display error messages dynamically
                   if (isset($error_message)) {
                       echo "<div class='alert alert-danger mb-4'>" . $error_message . "</div>";
                   }
@@ -109,7 +107,6 @@
   </div>
 </section>
 
-<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

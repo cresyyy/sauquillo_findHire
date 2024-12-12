@@ -9,7 +9,6 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'hr') {
 
 $post_id = $_GET['post_id'];
 
-// Fetch applications for the selected job post
 $applications = $conn->prepare("SELECT ja.application_id, ja.resume, ja.status, u.username AS applicant_name 
                                 FROM job_applications ja 
                                 JOIN users u ON ja.applicant_id = u.user_id 
@@ -32,7 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $update->close();
     }
 
-    // Redirect to refresh the page after updating
     header("Location: view_applications.php?post_id=$post_id");
     exit();
 }
@@ -94,8 +92,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <h2 class="text-center">
         Applications for Job Post: <span style="color: #0097b2;">
         <?php 
-            // Fetch the job title based on the post_id
-            $post_id = $_GET['post_id'];  // Assuming post_id is passed via the URL
+            
+            $post_id = $_GET['post_id'];  
             $sql = "SELECT title FROM job_posts WHERE post_id = ?";
             if ($stmt = $conn->prepare($sql)) {
                 $stmt->bind_param("i", $post_id);
@@ -103,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $stmt->bind_result($job_title);
                 $stmt->fetch();
                 $stmt->close();
-                echo htmlspecialchars($job_title);  // Display the job title
+                echo htmlspecialchars($job_title);  
             } else {
                 echo "Error fetching job title.";
             }

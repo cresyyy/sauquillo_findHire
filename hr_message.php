@@ -2,7 +2,7 @@
 include('core/dbConfig.php');
 session_start();
 
-// Ensure the user is logged in
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit;
@@ -15,7 +15,7 @@ $selected_user_id = isset($_GET['user_id']) ? $_GET['user_id'] : null;
 $user_query = "SELECT * FROM users WHERE user_id != '$current_user_id'";
 $user_result = mysqli_query($conn, $user_query);
 
-// Check for errors in the query
+
 if (!$user_result) {
     die("Error fetching users: " . mysqli_error($conn));
 }

@@ -2,13 +2,13 @@
 include 'core/dbConfig.php';
 session_start();
 
-// Ensure only HR users can access this page
+
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'hr') {
     header("Location: login.php");
     exit();
 }
 
-// Check if post_id is provided in the URL
+
 if (isset($_GET['post_id'])) {
     $post_id = $_GET['post_id'];
 
@@ -24,11 +24,10 @@ if (isset($_GET['post_id'])) {
         $stmt->close();
 
         if ($posted_by == $hr_id) {
-            // Delete the job post if it belongs to the logged-in HR user
             if ($stmt = $conn->prepare("DELETE FROM job_posts WHERE post_id = ?")) {
                 $stmt->bind_param("i", $post_id);
                 if ($stmt->execute()) {
-                    header("Location: hr_home.php");  // Redirect to HR home after deletion
+                    header("Location: hr_home.php"); 
                     exit();
                 } else {
                     echo "Error: " . $stmt->error;

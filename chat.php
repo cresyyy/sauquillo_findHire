@@ -2,7 +2,7 @@
 include('core/dbConfig.php');
 session_start();
 
-// Ensure the user is logged in
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit;
@@ -23,7 +23,6 @@ $query = "SELECT * FROM messages
           ORDER BY created_at ASC";
 $result = mysqli_query($conn, $query);
 
-// Check for errors in the query
 if (!$result) {
     die("Error executing query: " . mysqli_error($conn));
 }
@@ -45,7 +44,7 @@ if (!$result) {
     ?>
 </div>
 
-<!-- Send a New Message -->
+
 <form action="send_message.php" method="POST">
     <textarea name="message" placeholder="Type a message..." required></textarea>
     <input type="hidden" name="receiver_id" value="<?php echo $receiver_id; ?>">

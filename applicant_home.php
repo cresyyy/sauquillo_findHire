@@ -2,7 +2,7 @@
 include 'core/dbConfig.php';
 session_start();
 
-// Ensure only Applicants can access this page
+
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'applicant') {
     header("Location: login.php");
     exit();
@@ -15,7 +15,7 @@ $result = $conn->query("SELECT username FROM users WHERE user_id = $applicant_id
 $user = $result->fetch_assoc();
 $username = $user['username'];
 
-// Fetch all job posts and check if the applicant has applied to each
+
 $job_posts = $conn->query("SELECT jp.post_id, jp.title, jp.description, jp.location, 
                                   EXISTS (SELECT 1 FROM job_applications ja 
                                           WHERE ja.post_id = jp.post_id 
@@ -122,7 +122,6 @@ $job_posts = $conn->query("SELECT jp.post_id, jp.title, jp.description, jp.locat
         <?php endif; ?>
     </div>
 
-    <!-- Overlay Modal for Application Form -->
     <div id="applicationOverlay" class="overlay d-none">
         <div class="modal-content card shadow">
             <div class="card-header d-flex justify-content-between align-items-center">
@@ -151,15 +150,15 @@ $job_posts = $conn->query("SELECT jp.post_id, jp.title, jp.description, jp.locat
     </div>
 
     <script>
-        // Show the application form modal
+    
         function showApplicationForm(postId) {
-            document.getElementById('post_id').value = postId; // Set the post_id in the form
-            document.getElementById('applicationOverlay').classList.remove('d-none'); // Show the overlay
+            document.getElementById('post_id').value = postId; 
+            document.getElementById('applicationOverlay').classList.remove('d-none'); 
         }
 
-        // Close the application form modal
+        
         function closeApplicationForm() {
-            document.getElementById('applicationOverlay').classList.add('d-none'); // Hide the overlay
+            document.getElementById('applicationOverlay').classList.add('d-none'); 
         }
     </script>
 

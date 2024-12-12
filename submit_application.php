@@ -24,7 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_application']))
             $stmt->bind_param("iis", $applicant_id, $post_id, $resume_name);
 
             if ($stmt->execute()) {
-                // Redirect to applicant's homepage with success message
                 header("Location: applicant_home.php?success=1");
                 exit();
             } else {
